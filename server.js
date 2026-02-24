@@ -5,7 +5,7 @@ import multer from "multer";
 import path from "path";
 import { fileURLToPath } from "url";
 import fetch from "node-fetch";
-import fs from "fs/promises"; // <-- Adicionado para o fs.unlink funcionar na deleção
+import fs from "fs/promises"; // Necessário para o fs.unlink funcionar na deleção
 
 const app = express();
 app.use(cors());
@@ -16,19 +16,18 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // ==========================
-// Conexão MySQL (Preparado para Nuvem/Railway)
+// Conexão MySQL (Preparado para o Railway)
 // ==========================
-// O Railway geralmente fornece uma DATABASE_URL (ex: mysql://user:pass@host:port/db)
-// ou variáveis separadas. Este formato aceita ambos, mantendo localhost como fallback.
 const db = await mysql.createConnection(process.env.DATABASE_URL || {
-  host: process.env.DB_HOST || "localhost",
-  user: process.env.DB_USER || "root",
-  password: process.env.DB_PASSWORD || "",
-  database: process.env.DB_NAME || "painel_escola",
-  port: process.env.DB_PORT || 3306,
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "painel_escola",
 });
 
-// Criar tabela da secretaria se não existir e inserir dados iniciais
+// ==========================
+// CRIAÇÃO AUTOMÁTICA DAS TABELAS (A CORREÇÃO ESTÁ AQUI!)
+// ==========================
 await db.execute(`
   CREATE TABLE IF NOT EXISTS secretaria (
     id INT PRIMARY KEY,
@@ -37,6 +36,21 @@ await db.execute(`
   )
 `);
 await db.execute(`INSERT IGNORE INTO secretaria (id, status, ultima_senha) VALUES (1, 'livre', '--')`);
+
+await db.execute(`
+  CREATE TABLE IF NOT EXISTS imagens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    caminho VARCHAR(255) NOT NULL
+  )
+`);
+
+await db.execute(`
+  CREATE TABLE IF NOT EXISTS cardapio (
+    dia_semana VARCHAR(20) PRIMARY KEY,
+    matutino TEXT,
+    vespertino TEXT
+  )
+`);
 
 // ==========================
 // Upload de imagens
@@ -49,7 +63,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // ==========================
-// ROTAS - CLIMA E IMAGENS
+// ROTAS - CLIMA E IMAGENS (Exatamente as suas)
 // ==========================
 
 app.get("/api/clima", async (req, res) => {
@@ -89,7 +103,6 @@ app.delete("/api/imagens/:id", async (req, res) => {
   try {
     const { id } = req.params;
 
-    // 1. Busca o caminho no banco para saber qual arquivo deletar da pasta
     const [rows] = await db.execute("SELECT caminho FROM imagens WHERE id = ?", [id]);
 
     if (rows.length === 0) {
@@ -99,16 +112,13 @@ app.delete("/api/imagens/:id", async (req, res) => {
     const nomeArquivo = rows[0].caminho;
     const caminhoCompleto = path.join(__dirname, "public", nomeArquivo);
 
-    // 2. Deleta o arquivo físico da pasta public/uploads
     try {
       await fs.unlink(caminhoCompleto);
     } catch (err) {
       console.log("Aviso: Arquivo não existia na pasta, removendo apenas do banco.");
     }
 
-    // 3. Deleta o registro no banco de dados
     await db.execute("DELETE FROM imagens WHERE id = ?", [id]);
-
     res.json({ success: true });
   } catch (error) {
     console.error("Erro ao deletar imagem:", error);
@@ -117,7 +127,7 @@ app.delete("/api/imagens/:id", async (req, res) => {
 });
 
 // ==========================
-// ROTAS - CARDÁPIO
+// ROTAS - CARDÁPIO (Exatamente as suas)
 // ==========================
 
 app.get("/api/cardapio/:dia", async (req, res) => {
@@ -144,7 +154,7 @@ app.post("/api/cardapio", async (req, res) => {
 });
 
 // ==========================
-// ROTAS - SECRETARIA
+// ROTAS - SECRETARIA (Exatamente as suas)
 // ==========================
 
 app.get("/api/secretaria", async (req, res) => {
@@ -178,7 +188,7 @@ app.get("/tv", (req, res) => res.sendFile(path.join(__dirname, "public/tv.html")
 app.get("/admin", (req, res) => res.sendFile(path.join(__dirname, "public/admin.html")));
 app.get("/", (req, res) => res.redirect("/tv"));
 
-// O Railway injeta a porta automaticamente na variável process.env.PORT
+// Porta do Railway
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, "0.0.0.0", () => {
