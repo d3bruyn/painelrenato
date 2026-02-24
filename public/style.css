@@ -1,0 +1,333 @@
+/* ========================
+   Estilo TV - Painel Escola (com animações)
+   ======================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #003b8e;
+  color: #000;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* ===== BARRA SUPERIOR ===== */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #00235a, #0047ab);
+  border-bottom: 4px solid #ff0000;
+  padding: 15px 30px;
+  height: 100px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.box {
+  background-color: #0047ab;
+  border: 2px solid #ff0000;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.8em;
+  padding: 10px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.box:hover {
+  transform: scale(1.03);
+  background-color: #0054d1;
+}
+
+/* ===== ANIMAÇÕES DE SAUDAÇÃO E HORA ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade {
+  animation: fadeIn 0.8s ease;
+}
+
+/* ===== LOGO ===== */
+.logo a {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.logo a:hover {
+  transform: scale(1.05);
+}
+
+.logo img {
+  height: 80px;
+  cursor: pointer;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.6));
+}
+
+/* ===== CONTEÚDO PRINCIPAL ===== */
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 25px;
+  height: calc(100vh - 120px);
+}
+
+/* ===== PAINEL DE IMAGENS ===== */
+.painel-imagens {
+  flex: 3;
+  background-color: #fff;
+  border: 3px solid #ff0000;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: calc(100vh - 180px);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+}
+
+.painel-imagens img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+/* ===== CARDÁPIO ===== */
+.cardapio {
+  flex: 1;
+  background-color: #fff;
+  border: 3px solid #ff0000;
+  border-radius: 16px;
+  padding: 25px 20px;
+  height: calc(100vh - 180px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* ===== TÍTULO DO CARDÁPIO ===== */
+.cardapio h2 {
+  font-size: 2.2em;
+  color: #000;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  border-bottom: 3px solid #ff0000;
+  padding-bottom: 10px;
+  width: 90%;
+}
+
+/* ===== TURNOS ===== */
+.turno {
+  margin: 25px 0;
+  width: 100%;
+}
+
+.turno h3 {
+  font-size: 1.8em;
+  color: #0047ab;
+  margin-bottom: 10px;
+}
+
+.turno p {
+  font-size: 1.4em;
+  color: #000;
+  line-height: 1.5em;
+  white-space: pre-line;
+}
+
+/* ===== SCROLLBAR ===== */
+.cardapio::-webkit-scrollbar {
+  width: 10px;
+}
+.cardapio::-webkit-scrollbar-thumb {
+  background-color: #ff0000;
+  border-radius: 8px;
+}
+.cardapio::-webkit-scrollbar-track {
+  background-color: #f0f0f0;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 1200px) {
+  .main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .painel-imagens, .cardapio {
+    width: 95%;
+    height: auto;
+  }
+}
+/* ===== Transição suave das imagens ===== */
+.imagem-tv {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 1.8s ease-in-out;
+}
+
+.painel-imagens {
+  position: relative;
+  overflow: hidden;
+}
+
+.imagem-tv.ativa {
+  opacity: 1;
+  z-index: 2;
+}
+
+.imagem-tv:not(.ativa) {
+  z-index: 1;
+}
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* distância entre clima e hora */
+}
+/* ===== SEÇÃO SECRETARIA (TV) ===== */
+.secretaria-container {
+    flex: 1; /* Mesma largura do cardápio */
+    background-color: #fff;
+    border: 3px solid #ff0000;
+    border-radius: 16px;
+    padding: 20px;
+    height: calc(100vh - 180px);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+}
+
+.secretaria-container h2 {
+    font-size: 2em;
+    color: #000;
+    border-bottom: 3px solid #ff0000;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.status-card {
+    padding: 30px 15px;
+    border-radius: 12px;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    transition: all 0.5s ease;
+}
+
+/* Cores dinâmicas dos status */
+.status-card.livre { background-color: #2ecc71; border: 4px solid #27ae60; }
+.status-card.ocupado { background-color: #e74c3c; border: 4px solid #c0392b; }
+.status-card.fechado { background-color: #7f8c8d; border: 4px solid #34495e; }
+
+.senha-display {
+    margin-top: 20px;
+}
+
+.senha-display p {
+    font-size: 1.5em;
+    color: #0047ab;
+    font-weight: bold;
+}
+
+#numeroSenha {
+    font-size: 3.5em;
+    display: block;
+    color: #ff0000;
+    background: #f8f8f8;
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 10px;
+    border: 2px dashed #0047ab;
+}
+
+/* Animação para quando chamar */
+.piscar {
+    animation: alert-flash 0.6s alternate infinite;
+}
+
+@keyframes alert-flash {
+    from { transform: scale(1); filter: brightness(1); }
+    to { transform: scale(1.05); filter: brightness(1.3); }
+}
+/* ===== ESTILO DO PACHEQUINHO ===== */
+
+#container-pachequinho {
+    position: fixed;
+    bottom: 30px; /* Um pouco acima da borda inferior */
+    right: 30px;  /* No canto inferior direito */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 9999; /* Garante que fique acima de tudo */
+    pointer-events: none; /* Deixa clicar no que estiver atrás dele se precisar */
+}
+
+#pachequinho-img {
+    width: 150px; /* Tamanho ideal para TVs */
+    height: auto;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+    animation: flutuar 3s ease-in-out infinite;
+}
+
+.balao-fala {
+    position: relative;
+    background: #ffffff;
+    border: 4px solid #0047ab; /* Azul para combinar com o tema da escola */
+    border-radius: 20px;
+    padding: 12px 25px;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #000;
+    box-shadow: 6px 6px 0px #ff0000; /* Sombra vermelha combinando com o painel */
+    animation: fadeIn 0.5s ease;
+}
+
+/* Triângulo do balão de fala */
+.balao-fala::after {
+    content: '';
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 18px 12px 0;
+    border-style: solid;
+    border-color: #0047ab transparent transparent;
+}
+
+/* Animação para ele ficar "voando" levemente */
+@keyframes flutuar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}

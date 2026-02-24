@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Escola - TV</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body> <div class="top-bar">
+    <div class="box" id="saudacao">Bom dia</div>
+
+    <div class="logo">
+        <a href="/admin">
+            <img src="logo.png" alt="Logo Escola">
+        </a>
+    </div>
+
+    <div class="top-right">
+        <div class="box" id="clima">--°C</div>
+        <div class="box" id="hora">00:00</div>
+    </div>
+</div>
+
+<div class="main">
+    <div class="painel-imagens">
+      <img id="imagemAtual" src="" alt="Imagens rodando">
+    </div>
+
+    <div class="coluna-lateral" style="display: flex; flex-direction: column; gap: 20px; flex: 1;">
+        
+        <div class="cardapio" style="height: auto; flex: 1;">
+          <h2>🍽️ Cardápio do Dia</h2>
+          <div class="turno">
+            <h3>Matutino</h3>
+            <p id="cardapioMatutino">Carregando...</p>
+          </div>
+          <div class="turno">
+            <h3>Integral</h3>
+            <p id="cardapioVespertino">Carregando...</p>
+          </div>
+        </div>
+        
+        <div class="status-secretaria cardapio" style="height: auto; flex: 0.8;">
+            <h2>Secretaria</h2>
+            <div id="statusBox" class="status-card livre">
+                <span id="statusTexto">LIVRE</span>
+            </div>
+            <div class="senha-atual">
+                <p style="margin-top: 15px; font-weight: bold;">Próximo da fila:</p>
+                <h1 id="numeroSenha" style="font-size: 3em; color: #ff0000;">--</h1>
+            </div>
+        </div>
+        
+    </div> </div>
+
+<audio id="audioChamada" src="airplane-ding-dong.mp3"></audio>
+<div id="container-pachequinho">
+    <div class="balao-fala" id="fala-pachequinho">Oláaa!</div>
+    <img src="pachequinho.gif" id="pachequinho-img" alt="Pachequinho">
+</div>
+De bruyn
+<script src="script-tv.js"></script>
+</body>
+</html>

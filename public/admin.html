@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Administrativo - Escola</title>
+  <link rel="stylesheet" href="painel_admin.css">
+</head>
+<body class="admin-body">
+  <header class="admin-header">
+    <a href="/tv.html" class="logo">
+      <img src="logo.png" alt="Logo Escola">
+    </a>
+    <h1>Painel Administrativo</h1>
+  </header>
+
+  <main class="admin-main">
+    <!-- ==========================
+         GERENCIAR IMAGENS
+    =========================== -->
+    <section class="card">
+      <h2>🖼️ Gerenciar Imagens</h2>
+      <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="imagemInput" name="imagem" accept="image/*" required>
+        <button type="submit">Enviar Imagem</button>
+      </form>
+
+      <div id="listaImagens" class="lista-imagens">
+        <p>Carregando imagens...</p>
+      </div>
+
+
+      <div class="admin-section">
+  <h2>Controle da Secretaria</h2>
+  
+  <div class="status-controls">
+    <button onclick="atualizarStatus('livre')" class="btn-status verde">Livre</button>
+    <button onclick="atualizarStatus('ocupado')" class="btn-status vermelho">Ocupado</button>
+    <button onclick="atualizarStatus('fechado')" class="btn-status cinza">Fechado</button>
+</div>
+
+  <div class="senha-control">
+    <input type="text" id="inputSenha" placeholder="Nº da Senha ou Nome">
+    <button onclick="chamarProximo()" class="btn-chamar">Chamar Próximo 🔔</button>
+  </div>
+</div>
+    </section>
+
+    <!-- ==========================
+         EDITAR CARDÁPIO (DOIS TURNOS)
+    =========================== -->
+    <section class="card">
+      <h2>🍽️ Editar Cardápio</h2>
+      <form id="cardapioForm">
+        <div class="dias-container">
+          <div class="dia">
+            <h3>Segunda-feira</h3>
+            <label>Matutino</label>
+            <textarea name="segunda_matutino" required></textarea>
+            <label>Vespertino</label>
+            <textarea name="segunda_vespertino" required></textarea>
+          </div>
+
+          <div class="dia">
+            <h3>Terça-feira</h3>
+            <label>Matutino</label>
+            <textarea name="terca_matutino" required></textarea>
+            <label>Vespertino</label>
+            <textarea name="terca_vespertino" required></textarea>
+          </div>
+
+          <div class="dia">
+            <h3>Quarta-feira</h3>
+            <label>Matutino</label>
+            <textarea name="quarta_matutino" required></textarea>
+            <label>Vespertino</label>
+            <textarea name="quarta_vespertino" required></textarea>
+          </div>
+
+          <div class="dia">
+            <h3>Quinta-feira</h3>
+            <label>Matutino</label>
+            <textarea name="quinta_matutino" required></textarea>
+            <label>Vespertino</label>
+            <textarea name="quinta_vespertino" required></textarea>
+          </div>
+
+          <div class="dia">
+            <h3>Sexta-feira</h3>
+            <label>Matutino</label>
+            <textarea name="sexta_matutino" required></textarea>
+            <label>Vespertino</label>
+            <textarea name="sexta_vespertino" required></textarea>
+          </div>
+        </div>
+
+        <button type="submit">Salvar Cardápio</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="admin-footer">
+    <p>© 2025 - Painel Escola Renato Pacheco</p>
+  </footer>
+
+  <script src="script-admin.js"></script>
+</body>
+</html>

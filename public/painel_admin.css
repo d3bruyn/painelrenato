@@ -1,0 +1,158 @@
+/* ============================
+   ESTILO DO PAINEL ADMIN
+============================ */
+
+.admin-body {
+  background-color: #f4f7ff;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0047ab;
+  border-bottom: 4px solid #ff0000;
+  padding: 10px;
+  position: relative;
+}
+
+.admin-header h1 {
+  color: white;
+  font-size: 2em;
+}
+
+.admin-header .logo {
+  position: absolute;
+  left: 20px;
+  top: 8px;
+}
+
+.admin-header img {
+  height: 60px;
+}
+
+.admin-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px;
+}
+
+.card {
+  background: white;
+  border: 3px solid #ff0000;
+  border-radius: 12px;
+  padding: 20px 30px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  width: 480px;
+  min-height: 400px;
+}
+
+.card h2 {
+  color: #0047ab;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#uploadForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+#uploadForm input[type="file"] {
+  border: 2px solid #0047ab;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+#uploadForm button {
+  background-color: #0047ab;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#uploadForm button:hover {
+  background-color: #002d73;
+}
+
+.lista-imagens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.lista-imagens img {
+  height: 100px;
+  border: 2px solid #0047ab;
+  border-radius: 8px;
+}
+
+.lista-imagens button {
+  display: block;
+  margin: 5px auto;
+  background: #ff0000;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.lista-imagens button:hover {
+  background: #cc0000;
+}
+
+.dias-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dias-container label {
+  font-weight: bold;
+  color: #0047ab;
+}
+
+.dias-container textarea {
+  width: 100%;
+  height: 60px;
+  padding: 8px;
+  border: 2px solid #0047ab;
+  border-radius: 6px;
+  resize: none;
+}
+
+#cardapioForm button {
+  margin-top: 15px;
+  width: 100%;
+  background-color: #0047ab;
+  color: white;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#cardapioForm button:hover {
+  background-color: #002d73;
+}
+
+.admin-footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #0047ab;
+  color: white;
+  border-top: 4px solid #ff0000;
+}
