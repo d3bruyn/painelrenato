@@ -68,11 +68,28 @@ const upload = multer({ storage });
 
 app.get("/api/clima", async (req, res) => {
   try {
-    const url = "https://api.open-meteo.com/v1/forecast?latitude=-20.3155&longitude=-40.3128&current_weather=true";
+    // Usamos a chave da variável de ambiente no Railway. 
+    // Se não tiver, ele avisa no painel.
+    const apiKey = process.env.WEATHER_API_KEY; 
+    
+    if (!apiKey) {
+      return res.json({ temperatura: "--" });
+    }
+
+    // Coordenadas de Vitória - ES
+    const lat = "-20.3155";
+    const lon = "-40.3128";
+    
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+    
     const resposta = await fetch(url);
     const dados = await resposta.json();
-    res.json({ temperatura: dados.current_weather.temperature, horario: dados.current_weather.time });
+    
+    // O OpenWeatherMap retorna a temperatura quebrando em decimais.
+    // O Math.round arredonda para ficar cravado (ex: 29.8 vira 30)
+    res.json({ temperatura: Math.round(dados.main.temp) });
   } catch (erro) {
+    console.error("Erro ao buscar clima:", erro);
     res.status(500).json({ erro: "Erro ao buscar clima" });
   }
 });
