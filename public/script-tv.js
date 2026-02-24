@@ -125,7 +125,8 @@ async function atualizarClima() {
   }
 }
 
-setInterval(atualizarClima, 60000); // Atualiza a cada 1 min
+// Mudei de 60000 (1 min) para 600000 (10 min) para não estourar o limite gratuito da API
+setInterval(atualizarClima, 10 * 60 * 1000); 
 atualizarClima();
 // ========================
 // Reload automático do painel TV
